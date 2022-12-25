@@ -26,7 +26,8 @@ def caesar(direction, text, shift):
                 new_position += 26
 
         cipher_text += alphabet[new_position]
-    print(cipher_text)
+    print(f"Here is the {direction}d result of {text}:  {cipher_text}")
+
     
 
 caesar(direction, text, shift)
