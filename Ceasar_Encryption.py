@@ -1,9 +1,6 @@
 alphabet = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-    'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd',
-    'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-    't', 'u', 'v', 'w', 'x', 'y', 'z'
-]
+    'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 def main():
   direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
   text = input("Type your message:\n").lower()
@@ -16,14 +13,20 @@ def main():
   
       for letter in text:
           position = alphabet.index(letter)
-          if direction == "encode":
-              new_position = position + shift
-              if new_position > 25:
-                  new_position -= 26
+          new_position = 0
+          if direction == "encode": 
+              if (position + shift) <= 25:
+                new_position = position + shift
+                #print(f"this is the position: {new_position}")
+              elif (position + shift) > 25:
+                new_position += ((position + shift) % 26)
+                  #print(f"this is the position: {new_position}")
+                
           elif direction == "decode":
-              new_position = position - shift
-              if new_position < 0:
-                  new_position += 26
+              if (position - shift) >= 0:
+                  new_position = position - shift
+              elif (position - shift) < 0:
+                new_position = (26 - ((position + shift)% 26))
         
           cipher_text += alphabet[new_position]
       print(f"Here is the {direction}d result of {text}:  {cipher_text}")
@@ -38,5 +41,4 @@ def main():
   
   caesar(direction, text, shift)
 main()
-
 
